@@ -1,0 +1,68 @@
+﻿@model SisTransp.Dominio.Entidades.Caja
+
+@{
+    ViewBag.Title = "Registrar Gasto";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h4>Registrar Gastos del Viaje</h4>
+        </div>
+
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Viaje</label>
+
+                        @Html.DropDownListFor(
+                            x => x.IdViaje,
+                            ViewBag.Viajes as SelectList,
+                            "-- Seleccione viaje --",
+                            new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Peajes</label>
+                        @Html.TextBoxFor(x => x.Peajes,
+                        new { @class = "form-control", type = "number", step = "0.01" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Viáticos</label>
+                        @Html.TextBoxFor(x => x.Viaticos,
+                        new { @class = "form-control", type = "number", step = "0.01" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Hospedaje</label>
+                        @Html.TextBoxFor(x => x.Hospedaje,
+                        new { @class = "form-control", type = "number", step = "0.01" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Otros Gastos</label>
+                        @Html.TextBoxFor(x => x.OtrosGastos,
+                        new { @class = "form-control", type = "number", step = "0.01" })
+                    </div>
+                </div>
+
+                <br />
+
+                <button class="btn btn-danger">
+                    Guardar
+                </button>
+
+                <a href="/Caja" class="btn btn-secondary">
+                    Volver
+                </a>
+            }
+        </div>
+    </div>
+</div>

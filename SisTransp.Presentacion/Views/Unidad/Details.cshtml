@@ -1,0 +1,75 @@
+﻿@model SisTransp.Dominio.Entidades.Unidad
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h4>Detalle Unidad</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <label>Placa</label>
+
+                    <input class="form-control"
+                           value="@Model.Placa"
+                           readonly />
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <label>Marca</label>
+
+                    <input class="form-control"
+                           value="@Model.Marca"
+                           readonly />
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <label>Modelo</label>
+
+                    <input class="form-control"
+                           value="@Model.Modelo"
+                           readonly />
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <label>Capacidad Tanque</label>
+
+                    <input class="form-control"
+                           value="@Model.CapacidadTanque Gal"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <br />
+
+            <a href="/Unidad"
+               class="btn btn-secondary">
+
+                Volver
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,215 @@
+﻿@model IEnumerable<SisTransp.Dominio.Entidades.CajaListado>
+
+@{
+    ViewBag.Title = "Caja - Gastos Operativos";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <div class="row mb-3">
+
+            </div>
+            <div class="row">
+
+                <div class="col-md-8">
+                    <h3>Caja - Gastos Operativos</h3>
+                </div>
+                <div class="col-md-4 text-end">
+                    <a href="/Caja/Create" class="btn btn-light">
+                        + Registrar Gasto
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="col-md-4 mb-3">
+                <input type="text" id="buscarTabla" class="form-control" placeholder="Buscar..." />
+            </div>
+            <table class="table table-hover">
+                <thead style="background:#B71C1C;color:white">
+                    <tr>
+                        <th>ID</th>
+                        <th>Viaje</th>
+                        <th>Unidad</th>
+                        <th>Chofer</th>
+                        <th>Peajes</th>
+                        <th>Viáticos</th>
+                        <th>Hospedaje</th>
+                        <th>Otros</th>
+                        <th>Total</th>
+                        <th>Fecha</th>
+                        <th>Imprimir</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.IdCaja</td>
+                            <td>@item.Ruta</td>
+                            <td>@item.Placa</td>
+                            <td>@item.Chofer</td>
+                            <td>S/ @item.Peajes</td>
+                            <td>S/ @item.Viaticos</td>
+                            <td>S/ @item.Hospedaje</td>
+                            <td>S/ @item.OtrosGastos</td>
+                            <td>
+                                <span class="badge bg-success">
+                                    S/ @item.TotalGastos
+                                </span>
+                            </td>
+                            <td>@item.FechaRegistro.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm"
+                                        onclick="imprimirDespacho('@item.IdCaja',
+                                      '@item.Ruta',
+                                      '@item.Placa',
+                                      '@item.Chofer',
+                                      '@item.Peajes',
+                                      '@item.Viaticos',
+                                      '@item.Hospedaje',
+                                      '@item.OtrosGastos',
+                                      '@item.TotalGastos')">
+                                    Imprimir
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $("#buscarTabla").on("keyup", function () {
+            var valor = $(this).val().toLowerCase();
+
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(valor) > -1);
+            });
+        });
+    </script>
+        <script>
+            $("#buscarTabla").on("keyup", function () {
+                var valor = $(this).val().toLowerCase();
+
+                $("table tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(valor) > -1);
+                });
+            });
+
+            function imprimirDespacho(id, ruta, placa, chofer, peajes, viaticos, hospedaje, otros, total) {
+
+                var contenido = `
+                        <html>
+                        <head>
+                            <title>Despacho de Dinero</title>
+                            <style>
+                                body {
+                                    font-family: Arial;
+                                    padding: 30px;
+                                }
+
+                                .titulo {
+                                    text-align: center;
+                                    color: #B71C1C;
+                                    border-bottom: 2px solid #B71C1C;
+                                    padding-bottom: 10px;
+                                    margin-bottom: 25px;
+                                }
+
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                    margin-top: 20px;
+                                }
+
+                                td, th {
+                                    border: 1px solid #ccc;
+                                    padding: 10px;
+                                }
+
+                                th {
+                                    background: #B71C1C;
+                                    color: white;
+                                }
+
+                                .total {
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    text-align: right;
+                                    margin-top: 20px;
+                                }
+
+                                .firmas {
+                                    margin-top: 80px;
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
+
+                                .firma {
+                                    width: 40%;
+                                    text-align: center;
+                                    border-top: 1px solid #000;
+                                    padding-top: 8px;
+                                }
+                            </style>
+                        </head>
+                        <body>
+
+                            <h2 class="titulo">Despacho de Dinero - SisTransp</h2>
+
+                            <p><strong>N° Despacho:</strong> ${id}</p>
+                            <p><strong>Fecha:</strong> ${new Date().toLocaleDateString()}</p>
+                            <p><strong>Unidad:</strong> ${placa}</p>
+                            <p><strong>Chofer:</strong> ${chofer}</p>
+                            <p><strong>Ruta:</strong> ${ruta}</p>
+
+                            <table>
+                                <tr>
+                                    <th>Concepto</th>
+                                    <th>Monto</th>
+                                </tr>
+                                <tr>
+                                    <td>Peajes</td>
+                                    <td>S/ ${peajes}</td>
+                                </tr>
+                                <tr>
+                                    <td>Viáticos</td>
+                                    <td>S/ ${viaticos}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hospedaje</td>
+                                    <td>S/ ${hospedaje}</td>
+                                </tr>
+                                <tr>
+                                    <td>Otros gastos</td>
+                                    <td>S/ ${otros}</td>
+                                </tr>
+                            </table>
+
+                            <div class="total">
+                                Total entregado: S/ ${total}
+                            </div>
+
+                            <div class="firmas">
+                                <div class="firma">Responsable de Caja</div>
+                                <div class="firma">Chofer</div>
+                            </div>
+
+                        </body>
+                        </html>
+                    `;
+
+                var ventana = window.open('', '_blank');
+                ventana.document.write(contenido);
+                ventana.document.close();
+                ventana.print();
+            }
+        </script>
+
+}

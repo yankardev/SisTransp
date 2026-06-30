@@ -1,0 +1,179 @@
+﻿@model IEnumerable<SisTransp.Dominio.Entidades.Unidad>
+
+@{
+    ViewBag.Title = "Gestión de Unidades";
+}
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div class="row">
+
+                <div class="col-md-8">
+
+                    <h3>
+                        Gestión de Unidades
+                    </h3>
+
+                </div>
+
+
+                <div class="col-md-4 text-end">
+
+                    <a href="/Unidad/Create"
+                       class="btn btn-light">
+
+                        + Nueva Unidad
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card-body">
+            <div class="col-md-4 mb-3">
+                <input type="text" id="buscarTabla" class="form-control" placeholder="Buscar..." />
+            </div>
+            <table class="table table-hover">
+
+                <thead style="background:#B71C1C;color:white">
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Placa</th>
+
+                        <th>Marca</th>
+
+                        <th>Modelo</th>
+
+                        <th>Capacidad</th>
+
+                        <th>Estado</th>
+
+                        <th width="250">
+
+                            Acciones
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+
+                            <td>
+                                @item.IdUnidad
+                            </td>
+
+                            <td>
+                                @item.Placa
+                            </td>
+
+                            <td>
+                                @item.Marca
+                            </td>
+
+                            <td>
+                                @item.Modelo
+                            </td>
+
+                            <td>
+                                @item.CapacidadTanque Gal
+                            </td>
+
+                            <td>
+
+                                @if (item.Estado == "Activa")
+                                {
+                                    <span class="badge bg-success">
+                                        Activa
+                                    </span>
+                                }
+                                else if (item.Estado == "Mantenimiento")
+                                {
+                                    <span class="badge bg-warning text-dark">
+                                        Mantenimiento
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+                                        Baja
+                                    </span>
+                                }
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="btn-group">
+
+                                    <a href="/Unidad/Edit/@item.IdUnidad"
+                                       class="btn btn-warning btn-sm">
+
+                                        Editar
+
+                                    </a>
+
+
+                                    <a href="/Unidad/Details/@item.IdUnidad"
+                                       class="btn btn-info btn-sm">
+
+                                        Ver
+
+                                    </a>
+
+
+                                    <a href="/Unidad/Delete/@item.IdUnidad"
+                                       onclick="return confirm('¿Eliminar unidad?')"
+                                       class="btn btn-danger btn-sm">
+
+                                        Eliminar
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        $("#buscarTabla").on("keyup", function () {
+            var valor = $(this).val().toLowerCase();
+
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(valor) > -1);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,183 @@
+﻿@model IEnumerable<SisTransp.Dominio.Entidades.ViajeListado>
+
+@{
+    ViewBag.Title = "Reporte General";
+}
+
+<div class="card">
+
+    <div class="card-header">
+        <h3>Reporte General de Operaciones</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <div style="width: 300px;">
+                <input type="text"
+                       id="buscarTabla"
+                       class="form-control"
+                       placeholder="🔍 Buscar..." />
+            </div>
+
+            <button class="btn btn-danger" onclick="imprimirReporte()">
+                🖨️ Imprimir Reporte General
+            </button>
+
+        </div>
+
+        <table class="table table-bordered table-hover" id="tablaReporte">
+
+            <thead class="table-danger">
+
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>Unidad</th>
+                    <th>Chofer</th>
+                    <th>Ruta</th>
+                    <th>Salida</th>
+                    <th>Llegada</th>
+                    <th>Estado</th>
+                    <th>COMBUSTIBLE</th>
+                    <th>GASTOS</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdViaje</td>
+                        <td class="text-center">@item.Placa</td>
+                        <td>@item.Chofer</td>
+                        <td>@item.Ruta</td>
+                        <td>@item.FechaSalida.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@item.FechaLlegada.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td class="text-center">@item.Estado</td>
+                        <td class="text-center">
+                            @if (item.TieneCombustible == "Sí")
+                            {
+                                <span class="badge bg-success">Sí</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">No</span>
+                            }
+                        </td>
+
+                        <td class="text-center">
+                            @if (item.TieneGastos == "Sí")
+                            {
+                                <span class="badge bg-success">Sí</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">No</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $("#buscarTabla").on("keyup", function () {
+            var valor = $(this).val().toLowerCase();
+
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(valor) > -1);
+            });
+        });
+    </script>
+
+        <script>
+
+            function imprimirReporte() {
+
+                var contenido = document.getElementById("tablaReporte").outerHTML;
+
+                var ventana = window.open("", "", "width=900,height=700");
+
+                ventana.document.write(`
+                    <html>
+                    <head>
+                        <title>Reporte General SisTransp</title>
+
+                        <style>
+
+                            body {
+                                font-family: Arial;
+                                padding: 30px;
+                            }
+
+                            h2 {
+                                text-align: center;
+                                color: #B71C1C;
+                                margin-bottom: 5px;
+                            }
+
+                            h4 {
+                                text-align: center;
+                                color: #555;
+                                margin-top: 0;
+                                margin-bottom: 25px;
+                            }
+
+                            p {
+                                text-align: right;
+                                font-size: 14px;
+                            }
+
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                            }
+
+                            th {
+                                background: #B71C1C;
+                                color: white;
+                            }
+
+                            th, td {
+                                border: 1px solid #ccc;
+                                padding: 8px;
+                                text-align: center;
+                            }
+
+                        </style>
+
+                    </head>
+
+                    <body>
+
+                        <h2>SisTransp</h2>
+
+                        <h4>Reporte General de Operaciones</h4>
+
+                        <p>
+                            Fecha de emisión:
+                            ${new Date().toLocaleDateString()}
+                        </p>
+
+                        ${contenido}
+
+                    </body>
+
+                    </html>
+                `);
+
+
+                ventana.document.close();
+
+                ventana.print();
+
+            }
+
+        </script>
+
+    
+}

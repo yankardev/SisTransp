@@ -1,0 +1,77 @@
+﻿@model SisTransp.Dominio.Entidades.Unidad
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h4>Editar Unidad</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(
+                x => x.IdUnidad)
+
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        <label>Placa</label>
+
+                        @Html.TextBoxFor(
+                        x => x.Placa,
+                        new { @class = "form-control" })
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Marca</label>
+                        @Html.DropDownListFor(x => x.Marca,new SelectList(ViewBag.Marcas),"--Seleccione--",
+                        new{@class = "form-control"})
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Modelo</label>
+                        @Html.DropDownListFor(x => x.Modelo,new SelectList(ViewBag.Modelos),"--Seleccione--",
+                        new{@class = "form-control"})
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Capacidad Tanque</label>
+
+                        @Html.TextBoxFor(
+                        x => x.CapacidadTanque,
+                        new { @class = "form-control" })
+
+                    </div>
+
+                </div>
+
+                <br />
+
+                <button class="btn btn-danger">
+
+                    Actualizar
+
+                </button>
+
+                <a href="/Unidad"
+                   class="btn btn-secondary">
+
+                    Volver
+
+                </a>
+
+            }
+
+        </div>
+
+    </div>
+
+</div>

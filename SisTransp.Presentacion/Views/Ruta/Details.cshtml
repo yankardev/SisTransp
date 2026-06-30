@@ -1,0 +1,52 @@
+﻿@model SisTransp.Dominio.Entidades.Ruta
+
+@{
+    ViewBag.Title = "Detalle Ruta";
+}
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h4>Detalle de Ruta</h4>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label>Origen</label>
+                    <input class="form-control"
+                           value="@Model.Origen"
+                           readonly />
+                </div>
+
+                <div class="col-md-4">
+                    <label>Destino</label>
+                    <input class="form-control"
+                           value="@Model.Destino"
+                           readonly />
+                </div>
+
+                <div class="col-md-4">
+                    <label>Distancia Km</label>
+                    <input class="form-control"
+                           value="@Model.DistanciaKm Km"
+                           readonly />
+                </div>
+
+            </div>
+
+            <br />
+
+            <a href="/Ruta" class="btn btn-secondary">
+                Volver
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

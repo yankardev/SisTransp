@@ -1,0 +1,102 @@
+﻿@model IEnumerable<SisTransp.Dominio.Entidades.CombustibleListado>
+
+@{
+    ViewBag.Title = "Control de Combustible";
+}
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div class="row">
+
+                <div class="col-md-8">
+                    <h3>Control de Combustible</h3>
+                </div>
+
+                <div class="col-md-4 text-end">
+                    <a href="/Combustible/Create" class="btn btn-light">
+                        + Registrar Abastecimiento
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+            <div class="col-md-4 mb-3">
+                <input type="text" id="buscarTabla" class="form-control" placeholder="Buscar..." />
+            </div>
+            <table class="table table-hover">
+                <thead style="background:#B71C1C;color:white">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Viaje</th>
+                        <th>Unidad</th>
+                        <th>Chofer</th>
+                        <th>Cantidad Actual</th>
+                        <th>Abastecido</th>
+                        <th>Precio Galón</th>
+                        <th>Total</th>
+                        <th>Fecha</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.IdCombustible</td>
+
+                            <td>@item.Ruta</td>
+
+                            <td>@item.Placa</td>
+
+                            <td>@item.Chofer</td>
+
+                            <td>@item.CantidadActual</td>
+
+                            <td>@item.CantidadAbastecida</td>
+
+                            <td>S/ @item.PrecioGalon</td>
+
+                            <td>
+                                <span class="badge bg-success">
+                                    S/ @item.Total
+                                </span>
+                            </td>
+
+                            <td>
+                                @item.FechaRegistro.ToString("dd/MM/yyyy")
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        $("#buscarTabla").on("keyup", function () {
+            var valor = $(this).val().toLowerCase();
+
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(valor) > -1);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,92 @@
+﻿@model SisTransp.Dominio.Entidades.Chofer
+
+@{
+    ViewBag.Title = "Editar Chofer";
+}
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h4>Editar Chofer</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            @using (Html.BeginForm())
+            {
+
+                @Html.HiddenFor(
+                x => x.IdChofer
+                )
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label>Nombre completo</label>
+
+                        @Html.TextBoxFor(
+                        x => x.NombreCompleto,
+                        new
+                        {
+                        @class = "form-control"
+                        })
+
+                    </div>
+
+
+                    <div class="col-md-3">
+
+                        <label>Licencia</label>
+
+                        @Html.TextBoxFor(
+                        x => x.Licencia,
+                        new
+                        {
+                        @class = "form-control"
+                        })
+
+                    </div>
+
+
+                    <div class="col-md-3">
+
+                        <label>Teléfono</label>
+
+                        @Html.TextBoxFor(
+                        x => x.Telefono,
+                        new
+                        {
+                        @class = "form-control"
+                        })
+
+                    </div>
+
+                </div>
+
+                <br />
+
+                <button class="btn btn-danger">
+
+                    Actualizar
+
+                </button>
+
+                <a href="/Chofer"
+                   class="btn btn-secondary">
+
+                    Volver
+
+                </a>
+
+            }
+
+        </div>
+
+    </div>
+
+</div>

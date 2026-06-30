@@ -1,0 +1,201 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login - SisTransp</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #8B0000, #B71C1C, #1f1f1f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .login-container {
+            width: 900px;
+            min-height: 500px;
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(0,0,0,.35);
+            display: flex;
+        }
+
+        .login-left {
+            width: 45%;
+            background: #B71C1C;
+            color: white;
+            padding: 50px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+            .login-left h1 {
+                font-size: 42px;
+                font-weight: 800;
+                margin-bottom: 10px;
+            }
+
+            .login-left p {
+                font-size: 15px;
+                line-height: 1.7;
+                opacity: .95;
+            }
+
+        .login-badge {
+            background: rgba(255,255,255,.18);
+            padding: 8px 14px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        .login-right {
+            width: 55%;
+            padding: 55px 50px;
+        }
+
+            .login-right h3 {
+                font-weight: 700;
+                color: #222;
+            }
+
+            .login-right small {
+                color: #666;
+            }
+
+        .form-control {
+            height: 46px;
+            border-radius: 10px;
+        }
+
+            .form-control:focus {
+                border-color: #B71C1C;
+                box-shadow: 0 0 0 .15rem rgba(183,28,28,.25);
+            }
+
+        .btn-login {
+            background: #B71C1C;
+            color: white;
+            border-radius: 10px;
+            height: 46px;
+            font-weight: 600;
+        }
+
+            .btn-login:hover {
+                background: #8f1414;
+                color: white;
+            }
+
+        .footer-text {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+        }
+
+        @@media(max-width: 768px) {
+            .login-container {
+                width: 92%;
+                display: block;
+            }
+
+            .login-left,
+            .login-right {
+                width: 100%;
+            }
+
+            .login-left {
+                padding: 35px;
+            }
+
+            .login-right {
+                padding: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-left">
+
+            <img src="~/Content/img/logo-sistransp.jpeg"
+                 style="width:350px;height:auto;margin-bottom:15px;border-radius:8px" />
+            <p>
+                Sistema de Gestión para Transporte Pesado orientado al control
+                de operaciones, combustible, unidades, choferes y gastos de viaje.
+            </p>
+
+            <span class="login-badge">
+                Acceso seguro por roles
+            </span>
+
+        </div>
+
+        <div class="login-right">
+
+            <h3>Iniciar Sesión</h3>
+
+            <small>
+                Ingrese sus credenciales para acceder al sistema
+            </small>
+
+            <hr />
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Correo electrónico</label>
+                    <input type="email"
+                           name="correo"
+                           class="form-control"
+                           placeholder="usuario@sistransp.com"
+                           required />
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password"
+                           name="clave"
+                           class="form-control"
+                           placeholder="Ingrese su contraseña"
+                           required />
+                </div>
+
+                <button class="btn btn-login w-100">
+                    Iniciar Sesión
+                </button>
+
+            </form>
+
+            <div class="footer-text">
+                © 2026 SisTransp - Sistema Integrado Transporte Pesado
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

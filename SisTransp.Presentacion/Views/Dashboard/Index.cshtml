@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+
+    string rol = Session["Rol"]?.ToString();
+}
+
+@if (TempData["ErrorPermiso"] != null)
+{
+    <div class="alert alert-warning">
+        @TempData["ErrorPermiso"]
+    </div>
+}
+<div class="container-fluid">
+
+    <div class="row mb-4">
+
+        <div class="col-md-12">
+            <h2>Dashboard Operativo</h2>
+
+            @if (rol == "Administrador")
+            {
+                <p class="text-muted">
+                    Acceso completo al sistema.
+                </p>
+            }
+
+            @if (rol == "Operaciones")
+            {
+                <p class="text-muted">
+                    Gestión de choferes, unidades, rutas y viajes.
+                </p>
+            }
+
+            @if (rol == "Combustible")
+            {
+                <p class="text-muted">
+                    Gestión de abastecimiento y control de combustible.
+                </p>
+            }
+
+            @if (rol == "Caja")
+            {
+                <p class="text-muted">
+                    Gestión de gastos operativos y caja.
+                </p>
+            }
+            <p class="text-muted">
+                Resumen general del sistema SisTransp
+            </p>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        @if (rol == "Administrador" || rol == "Operaciones")
+        {<div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Choferes
+                    </div>
+                    <div class="card-body">
+                        <h1>@ViewBag.TotalChoferes</h1>
+                        <p class="text-muted">Conductores registrados</p>
+                        <a href="/Chofer" class="btn btn-danger btn-sm">
+                            Ver Choferes
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Unidades
+                    </div>
+                    <div class="card-body">
+                        <h1>@ViewBag.TotalUnidades</h1>
+                        <p class="text-muted">Vehículos registrados</p>
+                        <a href="/Unidad" class="btn btn-danger btn-sm">
+                            Ver Unidades
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Rutas
+                    </div>
+                    <div class="card-body">
+                        <h1>@ViewBag.TotalRutas</h1>
+                        <p class="text-muted">Rutas activas</p>
+                        <a href="/Ruta" class="btn btn-danger btn-sm">
+                            Ver Rutas
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Viajes
+                    </div>
+                    <div class="card-body">
+                        <h1>@ViewBag.TotalViajes</h1>
+                        <p class="text-muted">Viajes programados</p>
+                        <a href="/Viaje" class="btn btn-danger btn-sm">
+                            Ver Viajes
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+        @if (rol == "Administrador" || rol == "Combustible")
+        {<div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Combustible
+                    </div>
+                    <div class="card-body">
+                        <h1>@ViewBag.TotalCombustible</h1>
+                        <p class="text-muted">Registros de abastecimiento</p>
+                        <a href="/Combustible" class="btn btn-danger btn-sm">
+                            Ver Combustible
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+        @if (rol == "Administrador" || rol == "Caja")
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Caja
+                    </div>
+                    <div class="card-body">
+                        <h1>@ViewBag.TotalCaja</h1>
+                        <p class="text-muted">Registros de gastos</p>
+                        <a href="/Caja" class="btn btn-danger btn-sm">
+                            Ver Caja
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (rol == "Administrador")
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Reporte General
+                    </div>
+                    <div class="card-body">
+                        <h1>📊</h1>
+                        <p class="text-muted">Resumen de operaciones registradas</p>
+                        <a href="/Reporte" class="btn btn-danger btn-sm">
+                            Ver Reporte
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

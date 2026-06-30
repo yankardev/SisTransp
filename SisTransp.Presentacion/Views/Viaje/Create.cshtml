@@ -1,0 +1,90 @@
+﻿@model SisTransp.Dominio.Entidades.Viaje
+
+@{
+    ViewBag.Title = "Nuevo Viaje";
+}
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h4>Registrar Nuevo Viaje</h4>
+        </div>
+
+        <div class="card-body">
+
+            @using (Html.BeginForm())
+            {
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <label>Unidad</label>
+
+                        @Html.DropDownListFor(
+                        x => x.IdUnidad,
+                        ViewBag.Unidades as SelectList,
+                        "-- Seleccione unidad --",
+                        new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Chofer</label>
+
+                        @Html.DropDownListFor(
+                        x => x.IdChofer,
+                        ViewBag.Choferes as SelectList,
+                        "-- Seleccione chofer --",
+                        new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Ruta</label>
+
+                        @Html.DropDownListFor(
+                        x => x.IdRuta,
+                        ViewBag.Rutas as SelectList,
+                        "-- Seleccione ruta --",
+                        new { @class = "form-control" })
+                    </div>
+
+                </div>
+
+                <br />
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label>Fecha Salida</label>
+
+                        @Html.TextBoxFor(
+                        x => x.FechaSalida,
+                        new { @class = "form-control", type = "datetime-local" })
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Fecha Llegada</label>
+
+                        @Html.TextBoxFor(
+                        x => x.FechaLlegada,
+                        new { @class = "form-control", type = "datetime-local" })
+                    </div>
+
+                </div>
+
+                <br />
+
+                <button class="btn btn-danger">
+                    Guardar
+                </button>
+
+                <a href="/Viaje" class="btn btn-secondary">
+                    Volver
+                </a>
+            }
+
+        </div>
+
+    </div>
+
+</div>

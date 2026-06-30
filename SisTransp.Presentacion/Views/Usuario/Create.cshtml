@@ -1,0 +1,59 @@
+﻿@model SisTransp.Dominio.Entidades.Usuario
+
+@{
+    ViewBag.Title = "Nuevo Usuario";
+}
+
+<div class="card">
+
+    <div class="card-header">
+        <h4>Registrar Nuevo Usuario</h4>
+    </div>
+
+    <div class="card-body">
+
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label>Nombre Completo</label>
+                    @Html.TextBoxFor(x => x.NombreCompleto,
+                    new { @class = "form-control", placeholder = "Ingrese nombre completo", required = "required" })
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Correo</label>
+                    @Html.TextBoxFor(x => x.Correo,
+                    new { @class = "form-control", type = "email", placeholder = "usuario@sistransp.com", required = "required" })
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Clave</label>
+                    @Html.PasswordFor(x => x.Clave,
+                    new { @class = "form-control", placeholder = "Ingrese contraseña", required = "required" })
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Rol</label>
+                    @Html.DropDownListFor(
+                        x => x.IdRol,
+                        ViewBag.Roles as SelectList,
+                        "-- Seleccione rol --",
+                        new { @class = "form-control", required = "required" })
+                </div>
+
+            </div>
+
+            <button class="btn btn-danger">
+                Guardar Usuario
+            </button>
+
+            <a href="/Usuario" class="btn btn-secondary">
+                Volver
+            </a>
+        }
+
+    </div>
+
+</div>

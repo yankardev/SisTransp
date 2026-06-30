@@ -1,0 +1,123 @@
+﻿@model IEnumerable<SisTransp.Dominio.Entidades.ViajeListado>
+
+@{
+    ViewBag.Title = "Programación de Viajes";
+}
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div class="row">
+
+                <div class="col-md-8">
+                    <h3>Programación de Viajes</h3>
+                </div>
+
+                <div class="col-md-4 text-end">
+                    <a href="/Viaje/Create" class="btn btn-light">
+                        + Nuevo Viaje
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+            <div class="col-md-4 mb-3">
+                <input type="text" id="buscarTabla" class="form-control" placeholder="Buscar..." />
+            </div>
+            <table class="table table-hover">
+
+                <thead style="background:#B71C1C;color:white">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Unidad</th>
+                        <th>Chofer</th>
+                        <th>Ruta</th>
+                        <th>Salida</th>
+                        <th>Llegada</th>
+                        <th>Estado</th>
+                        <th width="270">Acciones</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.IdViaje</td>
+                            <td>@item.Placa</td>
+                            <td>@item.Chofer</td>
+                            <td>@item.Ruta</td>
+                            <td>@item.FechaSalida.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@item.FechaLlegada.ToString("dd/MM/yyyy HH:mm")</td>
+
+                            <td>
+                                @if (item.Estado == "Programado")
+                                {
+                                    <span class="badge bg-primary">Programado</span>
+                                }
+                                else if (item.Estado == "En Ruta")
+                                {
+                                    <span class="badge bg-warning text-dark">En Ruta</span>
+                                }
+                                else if (item.Estado == "Finalizado")
+                                {
+                                    <span class="badge bg-success">Finalizado</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">@item.Estado</span>
+                                }
+                            </td>
+
+                            <td>
+                                <div class="btn-group">
+
+                                    <a href="@Url.Action("CambiarEstado", "Viaje", new { id = item.IdViaje, estado = "En Ruta" })"
+                                       class="btn btn-warning btn-sm">
+                                        En Ruta
+                                    </a>
+
+                                    <a href="@Url.Action("CambiarEstado", "Viaje", new { id = item.IdViaje, estado = "Finalizado" })"
+                                       class="btn btn-success btn-sm">
+                                        Finalizar
+                                    </a>
+
+                                    <a href="@Url.Action("CambiarEstado", "Viaje", new { id = item.IdViaje, estado = "Cancelado" })"
+                                       class="btn btn-danger btn-sm">
+                                        Cancelar
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        $("#buscarTabla").on("keyup", function () {
+            var valor = $(this).val().toLowerCase();
+
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(valor) > -1);
+            });
+        });
+    </script>
+}

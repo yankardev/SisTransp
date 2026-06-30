@@ -1,0 +1,103 @@
+﻿@model SisTransp.Dominio.Entidades.Combustible
+
+@{
+    ViewBag.Title = "Registrar Combustible";
+}
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h4>Registrar Abastecimiento</h4>
+        </div>
+
+        <div class="card-body">
+
+            @using (Html.BeginForm())
+            {
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <label>Viaje</label>
+
+                        @Html.DropDownListFor(
+                            x => x.IdViaje,
+                            ViewBag.Viajes as SelectList,
+                            "-- Seleccione viaje --",
+                            new { @class = "form-control" })
+
+                    </div>
+
+                </div>
+
+                <br />
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <label>Cantidad Actual</label>
+
+                        @Html.TextBoxFor(
+                            x => x.CantidadActual,
+                            new
+                            {
+                                @class = "form-control",
+                                type = "number",
+                                step = "0.01"
+                            })
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label>Cantidad Abastecida</label>
+
+                        @Html.TextBoxFor(
+                            x => x.CantidadAbastecida,
+                            new
+                            {
+                                @class = "form-control",
+                                type = "number",
+                                step = "0.01"
+                            })
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label>Precio por Galón</label>
+
+                        @Html.TextBoxFor(
+                            x => x.PrecioGalon,
+                            new
+                            {
+                                @class = "form-control",
+                                type = "number",
+                                step = "0.01"
+                            })
+
+                    </div>
+
+                </div>
+
+                <br />
+
+                <button class="btn btn-danger">
+                    Guardar
+                </button>
+
+                <a href="/Combustible" class="btn btn-secondary">
+                    Volver
+                </a>
+
+            }
+
+        </div>
+
+    </div>
+
+</div>

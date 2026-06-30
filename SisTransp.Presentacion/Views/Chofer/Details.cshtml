@@ -1,0 +1,67 @@
+﻿@model SisTransp.Dominio.Entidades.Chofer
+
+@{
+    ViewBag.Title = "Detalle Chofer";
+}
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h4>Detalle del Chofer</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <label>Nombre Completo</label>
+
+                    <input class="form-control"
+                           value="@Model.NombreCompleto"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label>Licencia</label>
+
+                    <input class="form-control"
+                           value="@Model.Licencia"
+                           readonly />
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <label>Teléfono</label>
+
+                    <input class="form-control"
+                           value="@Model.Telefono"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <br />
+
+            <a href="/Chofer"
+               class="btn btn-secondary">
+
+                Volver
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

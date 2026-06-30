@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SisTransp.Aplicacion/SisTransp.Aplicacion.csproj" Id="a360419a-6dfb-4a79-b351-0b9be447a6fa" />
+  <Project Path="SisTransp.Dominio/SisTransp.Dominio.csproj" Id="452c413d-f43b-41ec-8449-c5d1f7280555" />
+  <Project Path="SisTransp.Infraestructura/SisTransp.Infraestructura.csproj" Id="7b9b8695-d0af-4607-b322-cdc024c25374" />
+  <Project Path="SisTransp.Presentacion/SisTransp.Presentacion.csproj" Id="8ca4443a-60e5-46cd-8632-3d41e02dcfba" />
+</Solution>

@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - SisTransp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+<style>
+    body {
+        overflow-x: hidden;
+        background: #f4f5f7;
+    }
+
+    /* MENU LATERAL */
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        background: #B71C1C;
+        color: white;
+        padding-top: 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,.2);
+        overflow: auto;
+    }
+    .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        border-bottom: 1px solid rgba(255,255,255,.2);
+        padding: 15px;
+        text-align: center;
+    }
+        .logo h3 {
+            font-weight: bold;
+        }
+
+    .logo-img {
+        width: 210px;
+        height: auto;
+        object-fit: contain;
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+
+    .sidebar a {
+        color: white;
+        display: block;
+        padding: 15px 20px;
+        text-decoration: none;
+        transition: .3s;
+    }
+        .sidebar a:hover {
+            background: white;
+            color: #B71C1C;
+            padding-left: 28px;
+        }
+    /* CONTENIDO */
+
+    .contenido {
+        margin-left: 250px;
+        padding: 25px;
+    }
+
+    /* TARJETAS */
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,.1)
+    }
+    .card-header {
+        background: #B71C1C !important;
+        color: white;
+        border-radius: 15px 15px 0 0 !important;
+    }
+</style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="~/Content/img/logo-sistransp.jpeg" class="logo-img" alt="SisTransp" />
+            <small>
+                Sistema Integrado de Transporte Pesado
+            </small>
+        </div>
+
+        @{
+            var rol = Session["Rol"] != null ? Session["Rol"].ToString() : "";
+        }
+
+        @if (rol == "Administrador")
+        {
+            <a href="/Dashboard">Dashboard</a>
+            <a href="/Reporte">Reporte General</a>
+
+            <a data-bs-toggle="collapse" href="#menuAdministracion">Administración</a>
+            <div class="collapse" id="menuAdministracion">
+                <a href="/Usuario" style="padding-left:40px">
+                    Usuarios
+                </a>
+            </div>
+
+            <a data-bs-toggle="collapse" href="#menuOperaciones">Operaciones</a>
+            <div class="collapse" id="menuOperaciones">
+                <a href="/Chofer" style="padding-left:40px">Choferes</a>
+                <a href="/Unidad" style="padding-left:40px">Unidades</a>
+                <a href="/Ruta" style="padding-left:40px">Rutas</a>
+                <a href="/Viaje" style="padding-left:40px">Programación Viajes</a>
+            </div>
+
+            <a data-bs-toggle="collapse" href="#menuCombustible">Combustible</a>
+            <div class="collapse" id="menuCombustible">
+                <a href="/Combustible/Create" style="padding-left:40px">Registro</a>
+                <a href="/Combustible" style="padding-left:40px">Historial</a>
+            </div>
+
+            <a data-bs-toggle="collapse" href="#menuCaja">Caja</a>
+            <div class="collapse" id="menuCaja">
+                <a href="/Caja" style="padding-left:40px">Registro Gastos</a>
+            </div>
+        }
+
+        @if (rol == "Operaciones")
+        {
+            <a href="/Dashboard">Dashboard</a>
+
+            <a data-bs-toggle="collapse" href="#menuOperaciones">Operaciones</a>
+            <div class="collapse" id="menuOperaciones">
+                <a href="/Chofer" style="padding-left:40px">Choferes</a>
+                <a href="/Unidad" style="padding-left:40px">Unidades</a>
+                <a href="/Ruta" style="padding-left:40px">Rutas</a>
+                <a href="/Viaje" style="padding-left:40px">Programación Viajes</a>
+            </div>
+        }
+
+        @if (rol == "Combustible")
+        {
+            <a href="/Dashboard">Dashboard</a>
+
+            <a data-bs-toggle="collapse" href="#menuCombustible">Combustible</a>
+            <div class="collapse" id="menuCombustible">
+                <a href="/Combustible/Create" style="padding-left:40px">Registro</a>
+                <a href="/Combustible" style="padding-left:40px">Historial</a>
+            </div>
+        }
+
+        @if (rol == "Caja")
+        {
+            <a href="/Dashboard">Dashboard</a>
+
+            <a data-bs-toggle="collapse" href="#menuCaja">Caja</a>
+            <div class="collapse" id="menuCaja">
+                <a href="/Caja"
+                   style="padding-left:40px">
+                    Registro Gastos
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+
+    <div class="contenido">
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm mb-4 rounded">
+            <div class="container-fluid">
+                <span class="navbar-brand">
+                    Sistema Integrado Transporte Pesado
+                </span>
+                <div>
+                    <span class="me-4">
+                        @DateTime.Now.ToString("dd/MM/yyyy")
+                    </span>
+                    <span class="me-3">
+                        @Session["NombreUsuario"]
+                    </span>
+                    <span class="badge bg-danger">
+                        @Session["Rol"]
+                    </span>
+                    <a href="/Login/CerrarSesion" class="btn btn-sm btn-outline-danger ms-3">
+                        Salir
+                    </a>
+                </div>
+            </div>
+        </nav>
+        @RenderBody()
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts",
+    required: false)
+
+</body>
+
+</html>
